@@ -12,7 +12,8 @@ FILENAME_DATE_FORMAT = "%Y-%m-%d"
 ###################
 #MAKE SALES REPORT METHODS
 ####################
-#Make sure directory exists
+#Make sure directory exists and if it doesn't, create one 
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 #Load data from CV
 
