@@ -1,11 +1,16 @@
 import os
 import pandas as pd
+import logging
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill
+from pptx import Presentation
+from pptx.util import Inches, Pt
+from pptx.chart.data import CategoryChartData
+from pptx.enum.chart import XL_CHART_TYPE
 from datetime import datetime
 
 ###################
-#FIELDS
+#FIELDS & CONFIGURATION
 ####################
 INPUT_DIR = #path to Sales report CV
 OUTPUT_DIR = #path to outputted report
