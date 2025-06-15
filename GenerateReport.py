@@ -17,6 +17,16 @@ OUTPUT_DIR = #path to outputted report
 REPORT_NAME = #Report title
 FILENAME_DATE_FORMAT = "%Y-%m-%d"
 
+# Logging Configuration
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler("report_tool.log"),
+        logging.StreamHandler()
+    ]
+)
+
 ###################
 #MAKE SALES REPORT METHODS
 ####################
@@ -66,6 +76,8 @@ def write_excel_report(df, filename):
     output_path = os.path.join(OUTPUT_DIR, filename)
     wb.save(output_path)
     print(f"[✓] Report saved: {output_path}")
+    logging.info(f"[✓] Report saved: {output_path}")
+    # Add report information to logging
 
 ###################
 #CREATE POWERPOINT
@@ -122,24 +134,29 @@ def generate_ppt_summary(df, filename):
     pptx_path = os.path.join(OUTPUT_DIR, filename)
     prs.save(pptx_path)
     print(f"[✓] PowerPoint saved: {pptx_path}")
+    logging.info(f"[✓] PowerPoint saved: {pptx_path}")
     
 ###################
 #MAIN
 ####################
 def main():
     print("[*] Loading data...")
+    logging.info("[*] Loading data...")
     df = load_data(DATA_DIR)
 
     print("[*] Transforming data...")
+    logging.info("[*] Transforming data...")
     df = transform_data(df)
 
     today_str = datetime.today().strftime(FILENAME_DATE_FORMAT)
     output_filename = f"{REPORT_TEMPLATE_NAME}_{today_str}.xlsx"
 
     print("[*] Writing Excel report...")
+    logging.info("[*] Writing Excel report...")
     write_excel_report(df, output_filename)
     
     print("[*] Writing PowerPoint presentation...")
+    logging.info("[*] Writing PowerPoint presentation...")
     ppt_filename = f"{REPORT_TEMPLATE_NAME}_{today_str}.pptx"
     generate_ppt_summary(df, ppt_filename)
 
