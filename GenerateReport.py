@@ -77,7 +77,6 @@ def write_excel_report(df, filename):
     wb.save(output_path)
     print(f"[✓] Report saved: {output_path}")
     logging.info(f"[✓] Report saved: {output_path}")
-    # Add report information to logging
 
 ###################
 #CREATE POWERPOINT
@@ -147,6 +146,7 @@ def main():
     print("[*] Transforming data...")
     logging.info("[*] Transforming data...")
     df = transform_data(df)
+    logging.info(f"{df}")
 
     today_str = datetime.today().strftime(FILENAME_DATE_FORMAT)
     output_filename = f"{REPORT_TEMPLATE_NAME}_{today_str}.xlsx"
